@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<robot name="myrobot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="default_inertial" params="mass">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3" />
+    </inertial>
+  </xacro:macro>
+
+  <link name="base_link">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.11 -0.2 0.85"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/BodySat.dae"/>
+      </geometry>
+    </visual>
+     <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/BodySat.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.11 -0.2 0.85"/>
+    </collision>
+    <xacro:default_inertial mass="5"/>
+  </link>
+  
+  <xacro:macro name="leg" params="prefix reflect">
+    <joint name="base_to_${prefix}_leg" type="revolute">
+      <axis xyz="0 0.5 0"/>
+      <limit effort="1000.0" lower="0" upper="0.35" velocity="0.1"/>
+      <parent link="base_link"/>
+      <child link="${prefix}_leg"/>
+      <origin rpy="0 0 0" xyz="0.1 ${reflect*0.1} 0.9"/>
+    </joint>
+   <link name="${prefix}_leg">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.1 -0.09 -0.9"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/LegSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/LegSat.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.1 -0.09 -0.9"/>
+    </collision>
+      <xacro:default_inertial mass="20"/>
+    </link>
+    </xacro:macro>
+    
+  <xacro:leg prefix="right" reflect="-1" />
+  <xacro:leg prefix="left" reflect="1" />
+  
+  <xacro:macro name="hand" params="prefix reflect">
+    <joint name="base_to_${prefix}_hand" type="revolute">
+      <axis xyz="0 0.5 0"/>
+      <limit effort="1000.0" lower="-0.35" upper="0" velocity="0.1"/>
+      <parent link="base_link"/>
+      <child link="${prefix}_hand"/>
+      <origin rpy="0 0 ${reflect*3.1415}" xyz="0.1 ${reflect*0.15} 1.2"/>
+    </joint>
+   <link name="${prefix}_hand">
+    <visual>
+      <origin rpy="0 0 ${reflect*1.5708}" xyz="${reflect*-0.13} ${reflect*-0.33} -0.9"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+      <origin rpy="0 0 ${reflect*1.5708}" xyz="${reflect*-0.13} ${reflect*-0.33} -0.9"/>
+    </collision>
+      <xacro:default_inertial mass="8"/>
+    </link>
+    </xacro:macro>
+    
+  <xacro:hand prefix="right" reflect="-1" />
+  <xacro:hand prefix="left" reflect="1" />
+  
+  <link name="head">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.2 -0.15 0"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HeadSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HeadSat.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.2 -0.15 0"/>
+    </collision>
+      <xacro:default_inertial mass="2"/>
+  </link>
+
+  <joint name="base_link_to_head" type="fixed">
+    <axis xyz="0 0 0.5"/>
+    <limit effort="100.0" lower="-0.35" upper="0.35" velocity="0.1"/>
+    <parent link="base_link"/>
+    <child link="head"/>
+    <origin rpy="0 0 0" xyz="0.1 0 1.32"/>
+  </joint>
+  
+</robot>

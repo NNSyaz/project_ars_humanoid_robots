@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<COLLADA version="1.5.0" xmlns="http://www.collada.org/2008/03/COLLADASchema">
+  <asset>
+    <contributor />
+    <unit meter="1" />
+  </asset>
+  <library_lights />
+  <library_materials />
+  <library_effects />
+  <library_cameras />
+  <library_geometries>
+    <geometry id="mesh_1" name="CATIA STL">
+      <mesh>
+        <source id="mesh_1-position" name="position">
+          <float_array id="mesh_1-position-array" count="108">0.3 0 -0.2 0.3 0.4 -0.2 0.3 0 0.2 0.3 0 0.2 0.3 0.4 -0.2 0.3 0.4 0.2 0 0 -0.2 0 0 0.2 0 0.4 -0.2 0 0.4 -0.2 0 0 0.2 0 0.4 0.2 0.3 0 0.2 0.3 0.4 0.2 0 0 0.2 0 0 0.2 0.3 0.4 0.2 0 0.4 0.2 0.3 0.4 -0.2 0 0.4 -0.2 0.3 0.4 0.2 0.3 0.4 0.2 0 0.4 -0.2 0 0.4 0.2 0.3 0.4 -0.2 0.3 0 -0.2 0 0.4 -0.2 0 0.4 -0.2 0.3 0 -0.2 0 0 -0.2 0.3 0 0.2 0 0 0.2 0.3 0 -0.2 0.3 0 -0.2 0 0 0.2 0 0 -0.2 </float_array>
+          <technique_common>
+            <accessor source="#mesh_1-position-array" count="36" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="mesh_1-normal" name="normal">
+          <float_array id="mesh_1-normal-array" count="36">1 0 0 1 -0 0 -1 0 0 -1 0 0 0 0 1 0 0 1 0 1 0 0 1 0 0 0 -1 0 0 -1 0 -1 0 0 -1 0 </float_array>
+          <technique_common>
+            <accessor source="#mesh_1-normal-array" count="12" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="mesh_1-vertices">
+          <input semantic="POSITION" source="#mesh_1-position" />
+        </vertices>
+        <triangles material="default" count="12">
+          <input semantic="VERTEX" source="#mesh_1-vertices" offset="0" />
+          <input semantic="NORMAL" source="#mesh_1-normal" offset="1" />
+          <p>0 0 1 0 2 0 3 1 4 1 5 1 6 2 7 2 8 2 9 3 10 3 11 3 12 4 13 4 14 4 15 5 16 5 17 5 18 6 19 6 20 6 21 7 22 7 23 7 24 8 25 8 26 8 27 9 28 9 29 9 30 10 31 10 32 10 33 11 34 11 35 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_images />
+  <library_visual_scenes>
+    <visual_scene id="Scene">
+      <node id="CATIA-STL" sid="CATIA-STL" name="CATIA STL" type="NODE">
+        <matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#mesh_1" />
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <library_animations />
+  <scene>
+    <instance_visual_scene url="#Scene" />
+  </scene>
+</COLLADA>

@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<robot name="myrobot">
+
+   <link name="base_link">
+    <visual>
+      <origin rpy="0.1745 0 1.5708" xyz="0 -0.2 1.17"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/BodySae1.dae"/>
+      </geometry>
+    </visual>
+     <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/BodySae1.dae"/>
+      </geometry>
+      <origin rpy="0.1745 0 1.5708" xyz="0 -0.2 1.17"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <link name="pelvis">
+    <visual>
+      <origin rpy="0.1745 0 1.5708" xyz="-0.03 -0.2 0.1"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/PelvisSet.dae"/>
+      </geometry>
+    </visual>
+     <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/PelvisSet.dae"/>
+      </geometry>
+      <origin rpy="0.1745 0 1.5708" xyz="-0.03 -0.2 0.1"/>
+    </collision>
+    <inertial>
+      <mass value="5"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <joint name="base_link_to_pelvis" type="fixed">
+    <axis xyz="0 0 0.2"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="0" lower="-0.01" upper="0.01" velocity="0.5"/>
+    <parent link="base_link"/>
+    <child link="pelvis"/>
+    <origin rpy="0 0 0" xyz="0 0 0.92"/>
+  </joint>
+  
+<link name="left_leg">
+    <visual>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.44"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg1.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg1.dae"/>
+      </geometry>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.44"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+    </inertial>
+  </link>
+  
+  <joint name="pelvis_to_left_leg" type="revolute">
+    <axis xyz="0 -0.5 0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="3000.0" lower="0.500" upper="0.600" velocity="1"/>
+    <parent link="pelvis"/>
+    <child link="left_leg"/>
+    <origin rpy="0 0 0" xyz="0.1 0.15 0"/>
+  </joint>
+  
+  <link name="right_leg">
+    <visual>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.44"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg1.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg1.dae"/>
+      </geometry>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.44"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+    </inertial>
+  </link>
+  
+  <joint name="pelvis_to_right_leg" type="revolute">
+    <axis xyz="0 -0.5 0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="-3000.0" lower="0.400" upper="0.600" velocity="1"/>
+    <parent link="pelvis"/>
+    <child link="right_leg"/>
+    <origin rpy="0 0 0" xyz="0.1 -0.15 0"/>
+  </joint>
+  
+  <link name="left_leg2">
+    <visual>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.4"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg2.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg2.dae"/>
+      </geometry>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.4"/>
+    </collision>
+    <inertial>
+      <mass value="5"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <joint name="left_leg_to_left_leg2" type="fixed">
+    <axis xyz="0 -0.5 0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="3000" lower="-0.990" upper="-0.790" velocity="0.5"/>
+    <parent link="left_leg"/>
+    <child link="left_leg2"/>
+    <origin rpy="0 0.96 0" xyz="0 0 -0.5"/>
+  </joint>
+  
+  <link name="right_leg2">
+    <visual>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.4"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg2.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg2.dae"/>
+      </geometry>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.4"/>
+    </collision>
+    <inertial>
+      <mass value="5"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <joint name="right_leg_to_right_leg2" type="fixed">
+    <axis xyz="0 -0.5 0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="3000" lower="-0.990" upper="-0.790" velocity="0.5"/>
+    <parent link="right_leg"/>
+    <child link="right_leg2"/>
+    <origin rpy="0 0.96 0" xyz="0 0 -0.5"/>
+  </joint>  
+
+  <link name="left_leg3">
+    <visual>
+      <origin rpy="-0.25 0 1.5708" xyz="0.2 -0.15 -0.05"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg3.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg3.dae"/>
+      </geometry>
+      <origin rpy="-0.25 0 1.5708" xyz="0.2 -0.15 -0.05"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <joint name="left_leg2_to_left_leg3" type="revolute">
+    <axis xyz="0 -0.5 0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="-1000.0" lower="0.210" upper="0.280" velocity="0.5"/>
+    <parent link="left_leg2"/>
+    <child link="left_leg3"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.42"/>
+  </joint>
+  
+  <link name="right_leg3">
+    <visual>
+      <origin rpy="-0.25 0 1.5708" xyz="0.2 -0.15 -0.05"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg3.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg3.dae"/>
+      </geometry>
+      <origin rpy="-0.25 0 1.5708" xyz="0.2 -0.15 -0.05"/>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <joint name="right_leg2_to_right_leg3" type="revolute">
+    <axis xyz="0 -0.5 0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="-1000.0" lower="0.210" upper="0.280" velocity="0.5"/>
+    <parent link="right_leg2"/>
+    <child link="right_leg3"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.42"/>
+  </joint>  
+  
+  <link name="right_hand">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.13 -0.33 -0.9"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.13 -0.33 -0.9"/>
+    </collision>
+    <inertial>
+      <mass value="8"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <joint name="base_link_to_right_hand" type="fixed">
+    <axis xyz="0 -0.5 0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="1.0" lower="0" upper="0.9" velocity="0.5"/>
+    <parent link="base_link"/>
+    <child link="right_hand"/>
+    <origin rpy="0 -2.356 0" xyz="0.2 -0.15 1.3"/>
+  </joint>
+  
+  <link name="left_hand">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.13 -0.33 -0.9"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.13 -0.33 -0.9"/>
+    </collision>
+    <inertial>
+      <mass value="8"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <joint name="base_link_to_left_hand" type="revolute">
+    <axis xyz="0 0.5 0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <limit effort="10000" lower="0" upper="0.9" velocity="0.5"/>
+    <parent link="base_link"/>
+    <child link="left_hand"/>
+    <origin rpy="0 2.356 3.1416" xyz="0.2 0.15 1.3"/>
+  </joint>
+  
+  <link name="head">
+    <visual>
+      <origin rpy="0.1745 0 1.5708" xyz="-0.1 -0.15 0.15"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HeadSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HeadSat.dae"/>
+      </geometry>
+      <origin rpy="0.1745 0 1.5708" xyz="-0.1 -0.15 0.15"/>
+    </collision>
+    <inertial>
+      <mass value="2"/>
+      <inertia ixx="1e-3" ixy="0.0" ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3"/>
+    </inertial>
+  </link>
+  
+  <joint name="base_link_to_head" type="revolute">
+    <axis xyz="0 0 0.5"/>
+    <limit effort="100.0" lower="-0.850" upper="0.850" velocity="0.5"/>
+    <parent link="base_link"/>
+    <child link="head"/>
+    <origin rpy="0 0 0" xyz="0.1 0 1.32"/>
+  </joint>
+</robot>
+ 
+ 
+

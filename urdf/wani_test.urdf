@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<robot name="myrobot"> 
+  <link name="base_link">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.11 -0.2 0.92"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/PelvisSet.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/PelvisSet.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.11 -0.2 0.92"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.20249272 -0.20250583 0.06211146"/>
+      <mass value="10.00000000"/>
+      <inertia ixx="0.15041074" ixy="-0.00000615" ixz="-0.00000249" iyy="0.11756382" iyz="0.00000090" izz="0.23112792"/>
+    </inertial>
+  </link>
+  
+  <link name="body">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.11 -0.2 0.1"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/BodySae1.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/BodySae1.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.11 -0.2 0.1"/>     
+    </collision>
+    <inertial>
+      <origin xyz="0.19997700 -0.19998671 0.25811755"/>
+      <mass value="10.00000000"/>
+      <inertia ixx="0.20151511" ixy="-0.00000000" ixz="0.00000039" iyy="0.20151514" iyz="-0.00000038" izz="0.25709222"/>
+    </inertial>
+  </link>
+  
+  <joint name="base_link_to_body" type="fixed">
+    <parent link="base_link"/>
+    <child link="body"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="50" lower="0" upper="0.2" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0 0 0.94"/>
+  </joint>
+  
+  <link name="left_leg">
+    <visual>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.44"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg1.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg1.dae"/>
+      </geometry>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.44"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.10005853 0.17149170 0.10085291"/>
+      <mass value="15.00000000"/>
+      <inertia ixx="0.25437144" ixy="-0.00000022" ixz="0.00000004" iyy="0.09441054" iyz="-0.00000031" izz="0.25437051"/>
+    </inertial>
+  </link>
+  
+  <joint name="base_link_to_left_leg" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit effort="50" lower="-0.5" upper="0.5" velocity="1"/>
+    <parent link="base_link"/>
+    <child link="left_leg"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <origin rpy="0 0 0" xyz="0.1 0.1 0.92"/>
+  </joint>
+  
+  <link name="right_leg">
+    <visual>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.44"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg1.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg1.dae"/>
+      </geometry>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.44"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.10005853 0.17149170 0.10085291"/>
+      <mass value="15.00000000"/>
+      <inertia ixx="0.25437144" ixy="-0.00000022" ixz="0.00000004" iyy="0.09441054" iyz="-0.00000031" izz="0.25437051"/>
+    </inertial>
+  </link>
+  
+  <joint name="base_link_to_right_leg" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="50" lower="-0.5" upper="0.5" velocity="1"/>
+    <parent link="base_link"/>
+    <child link="right_leg"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <origin rpy="0 0 0" xyz="0.1 -0.1 0.92"/>
+  </joint>
+  
+  <link name="left_leg2">
+    <visual>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.4"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg2.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg2.dae"/>
+      </geometry>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.4"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.10284502 0.18549160 0.08964800"/>
+      <mass value="15.00000000"/>
+      <inertia ixx="0.24913623" ixy="-0.00000966" ixz="0.00001190" iyy="0.08858279" iyz="-0.00001755" izz="0.25843459"/>
+    </inertial>
+  </link>
+  
+  <joint name="left_leg_to_left_leg2" type="revolute">
+    <axis xyz="0 -1 0"/>
+    <limit effort="50" lower="-0.5" upper="0" velocity="1"/>
+    <parent link="left_leg"/>
+    <child link="left_leg2"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.43"/>
+  </joint>
+  
+  <link name="right_leg2">
+    <visual>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.4"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg2.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg2.dae"/>
+      </geometry>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.1 -0.09 -0.4"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.10284502 0.18549160 0.08964800"/>
+      <mass value="15.00000000"/>
+      <inertia ixx="0.24913623" ixy="-0.00000966" ixz="0.00001190" iyy="0.08858279" iyz="-0.00001755" izz="0.25843459"/>
+    </inertial>
+  </link>
+  
+  <joint name="right_leg_to_right_leg2" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="50" lower="0" upper="0.5" velocity="1"/>
+    <parent link="right_leg"/>
+    <child link="right_leg2"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.43"/>
+  </joint>  
+
+  <link name="left_leg3">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="0.2 -0.15 -0.05"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg3.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg3.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="0.2 -0.15 -0.05"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.16134525 0.17446571 0.02672897"/>
+      <mass value="40.00000000"/>
+      <inertia ixx="0.35078345" ixy="-0.00002883" ixz="-0.00001171" iyy="0.13771172" iyz="-0.00273541" izz="0.47245737"/>
+    </inertial>
+  </link>
+  
+  <joint name="left_leg2_to_left_leg3" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="50" lower="-0.3" upper="0.3" velocity="1"/>
+    <parent link="left_leg2"/>
+    <child link="left_leg3"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.4"/>
+  </joint>
+  
+  <link name="right_leg3">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="0.2 -0.15 -0.05"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg3.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/Leg3.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="0.2 -0.15 -0.05"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.16134525 0.17446571 0.02672897"/>
+      <mass value="40.00000000"/>
+      <inertia ixx="0.35078345" ixy="-0.00002883" ixz="-0.00001171" iyy="0.13771172" iyz="-0.00273541" izz="0.47245737"/>
+    </inertial>
+  </link>
+  
+  <joint name="right_leg2_to_right_leg3" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="50" lower="-0.3" upper="0.3" velocity="1"/>
+    <parent link="right_leg2"/>
+    <child link="right_leg3"/>
+    <dynamics damping="0.1" friction="0.1"/>
+    <origin rpy="0 0 0" xyz="0 0 -0.4"/>
+  </joint>  
+
+  <link name="right_hand">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.13 -0.33 -0.9"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.13 -0.33 -0.9"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.16405303 -0.12817503 0.50130021"/>
+      <mass value="8.00000000"/>
+      <inertia ixx="0.59727673" ixy="-0.00000098" ixz="0.00377988" iyy="0.60183456" iyz="-0.00000109" izz="0.06118834"/>
+    </inertial>
+  </link>
+  
+  <joint name="body_to_right_hand" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="50" lower="-0.9" upper="0.9" velocity="0.5"/>
+    <parent link="body"/>
+    <child link="right_hand"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <origin rpy="0 0 0" xyz="0.1 -0.15 0.25"/>
+  </joint>
+  
+  <link name="left_hand">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.13 -0.33 -0.9"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HandSat.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.13 -0.33 -0.9"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.16405303 -0.12817503 0.50130021"/>
+      <mass value="8.00000000"/>
+      <inertia ixx="0.59727673" ixy="-0.00000098" ixz="0.00377988" iyy="0.60183456" iyz="-0.00000109" izz="0.06118834"/>
+    </inertial>
+  </link>
+  
+  <joint name="body_to_left_hand" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="50" lower="-0.9" upper="0.9" velocity="1"/>
+    <parent link="body"/>
+    <child link="left_hand"/>
+    <origin rpy="0 0 3.1416" xyz="0.1 0.15 0.25"/>
+  </joint>
+  
+  <link name="head">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="-0.2 -0.15 0"/>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HeadSat.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://project_ars/meshes/HeadSat.dae"/>
+      </geometry>
+      <origin rpy="0 0 1.5708" xyz="-0.2 -0.15 0"/>
+    </collision>
+    <inertial>
+      <origin xyz="0.14999319 -0.20977530 0.20792024"/>
+      <mass value="2.00000000"/>
+      <inertia ixx="0.02626647" ixy="-0.00000002" ixz="0.00000033" iyy="0.02160944" iyz="0.00005699" izz="0.02166270"/>
+    </inertial>
+  </link>
+  
+  <joint name="body_to_head" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="50" lower="-0.3" upper="0.5" velocity="1"/>
+    <parent link="body"/>
+    <child link="head"/>
+    <dynamics damping="0.1" friction="0.0"/>
+    <origin rpy="0 0 0" xyz="0.1 0 0.4"/>
+  </joint>
+
+</robot>
